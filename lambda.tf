@@ -6,8 +6,8 @@ resource "aws_lambda_layer_version" "dependencies" {
   compatible_runtimes = ["python3.12"]
 }
 
-resource "aws_lambda_function" "flask-api" {
-  function_name = "flask-api"
+resource "aws_lambda_function" "url-shortener" {
+  function_name = "url-shortener"
 
   filename = data.archive_file.lambda_function.output_path
 
@@ -27,7 +27,7 @@ resource "aws_lambda_function" "flask-api" {
   }
 }
 
-resource "aws_lambda_function_url" "flask-api" {
-  function_name      = resource.aws_lambda_function.flask-api.function_name
+resource "aws_lambda_function_url" "url-shortener" {
+  function_name      = resource.aws_lambda_function.url-shortener.function_name
   authorization_type = "NONE"
 }

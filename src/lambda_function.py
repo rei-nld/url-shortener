@@ -1,7 +1,7 @@
 import string
 import random
-import json
-from flask import Flask
+import awsgi
+from flask import Flask, request, jsonify
 import boto3
 
 app = Flask(__name__)
@@ -56,5 +56,9 @@ def redirect(shortCode):
     else:
         return jsonify({'error': 'Short URL not found'}), 404
 
-if __name__ == '__main__':
-    app.run(debug=True)
+def lambda_handler(event, context):
+    # https://github.com/slank/awsgi/issues/73#issuecomment-1986868661
+    event['httpMethod'] = event['requestContext']['http']['method']
+    event['path'] = event['requestContext']['http']['path']
+    event['queryStringParameters'] = event.get('queryStringParameters', {})
+    return awsgi.response(app, event, context) 
