@@ -13,7 +13,6 @@ URL = "https://sho.rten.me/"
 CHARS = string.ascii_letters + string.digits
 
 def randomString(length=8):
-    """Generate a random string of fixed length using base-62."""
     return ''.join(random.choice(CHARS) for _ in range(length))
 
 def putItem(shortCode, longUrl):
@@ -52,7 +51,10 @@ def redirect(shortCode):
     longUrl = getLongUrl(shortCode)
     
     if longUrl:
-        return redirect(longUrl, code=301)
+        # TODO: Fix redirection
+        return jsonify({"statuscode": 301, 
+                        "headers": {"Location": longUrl}})
+
     else:
         return jsonify({'error': 'Short URL not found'}), 404
 
