@@ -20,15 +20,24 @@ resource "aws_iam_role_policy" "lambda_policy" {
   role = resource.aws_iam_role.lambda_execution_role.id
 
   policy = jsonencode({
-    Version = "2012-10-17"
+    Version = "2012-10-17",
     Statement = [
       {
-        Action = [
-          "*",
+        Action   = [
+          "dynamodb:GetItem"
         ]
         Effect   = "Allow"
         Resource = "*"
       },
+      {
+        Action   = [
+          "logs:CreateLogGroup",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Effect   = "Allow"
+        Resource = "*"
+      }
     ]
   })
 }
