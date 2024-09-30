@@ -2,3 +2,4 @@
 *tfstate*
 *.tfvars
 src/package.zip
+src/dependencies.zip
