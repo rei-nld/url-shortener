@@ -11,5 +11,5 @@ output "url-shortener_shorten_function_url" {
 }
 
 output "api-gateway_endpoint" {
-  value = ""
+  value = aws_apigatewayv2_api.url-shortener.api_endpoint
 }
