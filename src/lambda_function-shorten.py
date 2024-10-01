@@ -25,14 +25,22 @@ def lambda_handler(event, context):
     
     if not longUrl:
         return {
-            'error': 'Missing longUrl parameter'
+            "statusCode": 200,
+            "body": json.dumps({"error": "missing LongUrl"}),
+            "headers": {
+                "Content-Type": "application/json"
             }
-    
+        }
+
     shortCode = randomString()
 
     putItem(shortCode, longUrl)
     
     shortUrl = URL + shortCode
     return {
-        "ShortUrl": shortUrl
+            "statusCode": 200,
+            "body": json.dumps({"ShortUrl": shortUrl}),
+            "headers": {
+                "Content-Type": "application/json"
+            }
         }

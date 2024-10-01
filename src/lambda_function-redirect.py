@@ -17,20 +17,27 @@ def lambda_handler(event, context):
 
     if not shortCode:
         return {
-            "statusCode": 400,
-            "error": "ShortCode is required"
+            "statusCode": 200,
+            "body": json.dumps({"error": "missing ShortCode"}),
+            "headers": {
+                "Content-Type": "application/json"
+            }
         }
 
     longUrl = getLongUrl(shortCode)
     
     if longUrl:
         return {
-            "statusCode": 301, 
-            "headers": {"Location": longUrl}
+            "statusCode": 301,
+            "headers": {
+                "Location": longUrl
+            }
         }
-
     else:
         return {
-            "statusCode": 400,
-            "error": "ShortCode not in table"
+            "statusCode": 200,
+            "body": json.dumps({"error": "ShortCode not in table"}),
+            "headers": {
+                "Content-Type": "application/json"
             }
+        }
