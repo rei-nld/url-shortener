@@ -1,4 +1,4 @@
-import os, string, random
+import os, json
 import boto3
 
 dynamodb = boto3.resource("dynamodb")
