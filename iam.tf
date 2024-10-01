@@ -24,7 +24,8 @@ resource "aws_iam_role_policy" "lambda_policy" {
     Statement = [
       {
         Action   = [
-          "dynamodb:GetItem"
+          "dynamodb:GetItem",
+          "dynamodb:PutItem"
         ]
         Effect   = "Allow"
         Resource = "*"
